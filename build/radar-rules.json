@@ -4838,6 +4838,27 @@
       }
     ]
   },
+  "asianfanfics.com": {
+    "_name": "Asianfanfics",
+    "www": [
+      {
+        "title": "标签",
+        "docs": "https://docs.rsshub.app/routes/reading",
+        "source": [
+          "/browse/tag/:tag/:type"
+        ],
+        "target": "/asianfanfics/tag/:tag/:type"
+      },
+      {
+        "title": "关键词",
+        "docs": "https://docs.rsshub.app/routes/reading",
+        "source": [
+          "/browse/text_search?q=:keyword"
+        ],
+        "target": "/asianfanfics/text-search/:keyword"
+      }
+    ]
+  },
   "asiantolick.com": {
     "_name": "Asian to lick",
     ".": [
@@ -5765,7 +5786,7 @@
     "_name": "Blockworks",
     ".": [
       {
-        "title": "Blockworks News",
+        "title": "News",
         "docs": "https://docs.rsshub.app/routes/finance",
         "source": [
           "/"
@@ -20544,6 +20565,19 @@
           "/"
         ],
         "target": "/lightnovel/:keywords/:security_key"
+      }
+    ]
+  },
+  "likeshop.me": {
+    "_name": "LikeShop",
+    ".": [
+      {
+        "title": "Posts",
+        "docs": "https://docs.rsshub.app/routes/social-media",
+        "source": [
+          "/"
+        ],
+        "target": "/likeshop/:site"
       }
     ]
   },
