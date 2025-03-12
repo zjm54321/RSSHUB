@@ -33915,6 +33915,98 @@
         "view": 0,
         "location": "tags.ts"
       },
+      "/topics/:id/recommend": {
+        "path": [
+          "/topics/:id/recommend",
+          "/topics/recommend"
+        ],
+        "name": "机组推荐",
+        "url": "www.gcores.com",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/gcores/topics/recommend",
+        "parameters": {
+          "id": {
+            "description": "小组 ID，默认为空，即全部，可在对应小组页 URL 中找到"
+          }
+        },
+        "description": ":::tip\n若订阅 [我的年度总结](https://www.gcores.com/topics/581)，网址为 `https://www.gcores.com/topics/581`，请截取 `https://www.gcores.com/topics/` 到末尾的部分 `581` 作为 `id` 参数填入，此时目标路由为 [`/gcores/topics/581/recommend`](https://rsshub.app/gcores/topics/581/recommend)。\n:::\n",
+        "categories": [
+          "game"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.gcores.com/topics/home"
+            ],
+            "target": "/gcores/topics/recommend"
+          },
+          {
+            "source": [
+              "www.gcores.com/topics/:id"
+            ],
+            "target": "/gcores/topics/:id/recommend"
+          }
+        ],
+        "view": 1,
+        "location": "topics.ts"
+      },
+      "/topics/recommend": {
+        "path": [
+          "/topics/:id/recommend",
+          "/topics/recommend"
+        ],
+        "name": "机组推荐",
+        "url": "www.gcores.com",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/gcores/topics/recommend",
+        "parameters": {
+          "id": {
+            "description": "小组 ID，默认为空，即全部，可在对应小组页 URL 中找到"
+          }
+        },
+        "description": ":::tip\n若订阅 [我的年度总结](https://www.gcores.com/topics/581)，网址为 `https://www.gcores.com/topics/581`，请截取 `https://www.gcores.com/topics/` 到末尾的部分 `581` 作为 `id` 参数填入，此时目标路由为 [`/gcores/topics/581/recommend`](https://rsshub.app/gcores/topics/581/recommend)。\n:::\n",
+        "categories": [
+          "game"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.gcores.com/topics/home"
+            ],
+            "target": "/gcores/topics/recommend"
+          },
+          {
+            "source": [
+              "www.gcores.com/topics/:id"
+            ],
+            "target": "/gcores/topics/:id/recommend"
+          }
+        ],
+        "view": 1,
+        "location": "topics.ts"
+      },
       "/videos": {
         "path": "/videos",
         "name": "视频",
@@ -101335,6 +101427,38 @@
         ],
         "description": "| 通知公告 | 重要通知 | 项目申报 | 成果申报 | 信息快讯 |\n| -------- | -------- | -------- | -------- | -------- |\n|          | zytz     | xmsb     | cgsb     | xxkx     |",
         "location": "std.ts"
+      },
+      "/yz/:category?": {
+        "path": "/yz/:category?",
+        "categories": [
+          "university"
+        ],
+        "example": "/xjtu/yz/zsdt",
+        "parameters": {
+          "category": "栏目类型，默认请求`zsdt`，详见下方表格"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "yz.xjtu.edu.cn/index/:category.htm"
+            ],
+            "target": "/yz/:category"
+          }
+        ],
+        "name": "研究生招生信息网",
+        "maintainers": [
+          "YoghurtGuy"
+        ],
+        "description": "栏目类型\n\n| 招生动态 | 通知公告 | 政策法规 | 招生统计 | 历年复试线 | 博士招生 | 硕士招生 | 推免生 | 其他招生 |\n| -------- | -------- | -------- | -------- | ---------- | -------- | -------- | ------ | -------- |\n| zsdt     | tzgg     | zcfg     | zstj     | lnfsx      | bszs     | sszs     | tms    | qtzs     |",
+        "location": "yz.ts"
       },
       "/2yuan/news/:id?": {
         "path": "/2yuan/news/:id?",
