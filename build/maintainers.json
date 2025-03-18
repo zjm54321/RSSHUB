@@ -2695,6 +2695,9 @@
   "/geekpark/:column?": [
     "nczitzk"
   ],
+  "/gelbooru/post/:tags?/:quality?": [
+    "magicFeirl"
+  ],
   "/gelonghui/home/:tag?": [
     "TonyRL"
   ],
@@ -4286,6 +4289,9 @@
   ],
   "/kpmg/insights/:lang?": [
     "LogicJake"
+  ],
+  "/kpopping/news/:filter{.+}?": [
+    "nczitzk"
   ],
   "/ktown4u/artistBrandlist/:grpNo/:grpNo2?": [
     "JamesWDGu"
