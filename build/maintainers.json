@@ -587,9 +587,6 @@
   "/artstation/:handle": [
     "TonyRL"
   ],
-  "/asiafruitchina/categories/:category?": [
-    "nczitzk"
-  ],
   "/asianfanfics/tag/:tag/:type": [
     "KazooTTT"
   ],
