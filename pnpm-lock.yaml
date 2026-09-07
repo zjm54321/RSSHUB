@@ -368,6 +368,9 @@ importers:
       domhandler:
         specifier: 6.0.1
         version: 6.0.1
+      esbuild:
+        specifier: 0.28.1
+        version: 0.28.1
       eslint:
         specifier: 10.9.1
         version: 10.9.1(jiti@2.7.0)
