@@ -242,14 +242,19 @@ describe('targeted Playwright fetch retry', () => {
         expect(JSON.stringify(warn.mock.calls)).not.toContain('endpoint-fixture');
     });
 
-    it('propagates cancellation during navigation and awaits cleanup', async () => {
+    it.each([false, true])('propagates cancellation during navigation and awaits cleanup (detached clone signal: %s)', async (detachedCloneSignal) => {
         const { page, emit, instance } = makeBrowser(biliUrl);
         page.goto.mockImplementation(() => {
             emit();
             return new Promise(() => {});
         });
         const controller = new AbortController();
-        const result = fetchWithPlaywrightRetry(new Request(biliUrl, { signal: controller.signal }), () => Promise.resolve(new Response('denied', { status: 412 })));
+        const request = new Request(biliUrl, { signal: controller.signal });
+        if (detachedCloneSignal) {
+            // Reproduce the clone losing signal propagation after its internal controller is collected.
+            vi.spyOn(request, 'clone').mockImplementation(() => new Request(biliUrl));
+        }
+        const result = fetchWithPlaywrightRetry(request, () => Promise.resolve(new Response('denied', { status: 412 })));
         const assertion = expect(result).rejects.toMatchObject({ name: 'AbortError' });
         await vi.waitFor(() => expect(page.goto).toHaveBeenCalled());
         controller.abort();

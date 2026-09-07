@@ -122,17 +122,17 @@ async function destroyPage(instance: PlaywrightPage) {
     }
 }
 
-async function replayRequest(request: Request, body?: Uint8Array): Promise<Response> {
+async function replayRequest(request: Request, signal: AbortSignal, body?: Uint8Array): Promise<Response> {
     const controller = new AbortController();
     const onAbort = () => controller.abort();
-    request.signal.addEventListener('abort', onAbort, { once: true });
+    signal.addEventListener('abort', onAbort, { once: true });
     const timeout = Math.max(1, Math.min(config.requestTimeout || 30000, 30000));
     const timer = setTimeout(onAbort, timeout);
     const wait = <T>(promise: Promise<T>) => abortable(promise, controller.signal);
     let instance: PlaywrightPage | undefined;
     let closing = false;
     try {
-        if (request.signal.aborted) {
+        if (signal.aborted) {
             throw abortError();
         }
         const { getPlaywrightPage } = await wait(import('@/utils/playwright'));
@@ -198,7 +198,7 @@ async function replayRequest(request: Request, body?: Uint8Array): Promise<Respo
     } finally {
         closing = true;
         clearTimeout(timer);
-        request.signal.removeEventListener('abort', onAbort);
+        signal.removeEventListener('abort', onAbort);
         if (instance) {
             await destroyPage(instance);
         }
@@ -231,7 +231,8 @@ export default async function fetchWithPlaywrightRetry(request: Request, nativeF
             return response;
         }
         try {
-            const replayedResponse = await replayRequest(replay, body);
+            // Keep the original signal: a cloned Request can lose abort propagation after GC.
+            const replayedResponse = await replayRequest(replay, request.signal, body);
             if (request.signal.aborted) {
                 throw abortError();
             }
