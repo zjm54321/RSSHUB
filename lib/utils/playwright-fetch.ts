@@ -1,6 +1,6 @@
 import { config } from '@/config';
 import logger from '@/utils/logger';
-import { getPlaywrightPage } from '@/utils/playwright';
+import type { getPlaywrightPage } from '@/utils/playwright';
 
 const maxFormBytes = 16 * 1024;
 const responseHeadersToRemove = new Set(['connection', 'keep-alive', 'proxy-authenticate', 'proxy-authorization', 'te', 'trailer', 'transfer-encoding', 'upgrade', 'content-encoding', 'content-length']);
@@ -128,6 +128,7 @@ async function replayRequest(request: Request, body?: Uint8Array): Promise<Respo
         if (request.signal.aborted) {
             throw abortError();
         }
+        const { getPlaywrightPage } = await wait(import('@/utils/playwright'));
         const opening = getPlaywrightPage(request.url, { useConfiguredEndpoint: true, javaScriptEnabled: false, noGoto: true, closeTimeout: 0 });
         const cleanLateOpening = async () => {
             try {
